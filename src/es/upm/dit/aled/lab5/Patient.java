@@ -22,6 +22,8 @@ import es.upm.dit.aled.lab5.gui.Position2D;
  */
 public class Patient extends Thread {
 
+	//Estos objetos serán agentes dado que intentan usar los recursos compartidos de la clase Area, el monitor.
+	
 	private int number;
 	private List<Transfer> protocol;
 	private int indexProtocol;
@@ -164,7 +166,16 @@ public class Patient extends Thread {
 	 */
 	@Override
 	public void run() {
-		// TODO
+		while(!(indexProtocol == protocol.size())){
+			location.enter(this);
+			this.attendedAtLocation();
+			location.exit(this);
+			this.advanceProtocol();
+		}
+		this.attendedAtLocation();
+		EmergencyRoomGUI.getInstance().removePatient(this);
+		return;
+		// TODO*
 	}
 
 }
