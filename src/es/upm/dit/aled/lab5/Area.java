@@ -96,13 +96,9 @@ public class Area {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
-	/**
-	 * Thread safe method that allows a Patient to enter the area. If the Area is
-	 * currently full, the Patient thread must wait.
-	 * 
-	 * @param p The patient that wants to enter.
-	 */
+	
+	
+	
 	public synchronized void enter(Patient p){
 		// TODO*: method enter
 		try{
@@ -116,50 +112,19 @@ public class Area {
 			System.out.println("Hay un error en la ejecución del bucle while, método enter");
 		}
 	}
-	
-
-	/**
-	 * Thread safe method that allows a Patient to exit the area. After the Patient
-	 * has left, this method notifys all waiting Patients.
-	 * 
-	 * @param p The patient that wants to enter.
-	 */
 	public synchronized void exit(Patient p){
 			// TODO* method exit
 		numPatients--;
 		notifyAll();
 	}
-	
-	
-	/**
-	 * Returns the capacity of the Area. This method must be thread safe.
-	 * 
-	 * @return The capacity.
-	 */
 	public synchronized int getCapacity(){
 		// TODO*: method getCapacity
 		return capacity;
 	}
-	
-
-	
-	/**
-	 * Returns the current number of Patients being treated at the Area. This method must be thread safe.
-	 * 
-	 * @return The number of Patients being treated.
-	 */
 	public synchronized int getNumPatients() {
 		// TODO*: method getNumPatients
 		return numPatients;
 	}
-	
-
-	/**
-	 * Returns the current number of Patients waiting to be treated at the Area. This method must be thread safe.
-	 * 
-	 * @return The number of Patients waiting to be treated.
-	 */
-	
 	public synchronized int getWaiting() {
 		// TODO* method getWaiting
 		return waiting;
